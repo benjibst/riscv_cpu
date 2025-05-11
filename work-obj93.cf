@@ -1,12 +1,12 @@
 v 4
-file . "instruction_fetch.vhdl" "4943ec810415a31395ebf8893dd3f16f6efb33fa" "20250511103527.841":
-  entity instructionfetch at 1( 0) + 0 on 111;
-  architecture behavioral of instructionfetch at 16( 463) + 0 on 112;
-  entity instructionfetchtb at 37( 1135) + 0 on 113;
-  architecture behavioral of instructionfetchtb at 45( 1260) + 0 on 114;
-file . "program_counter.vhdl" "7eb22797184c1ad2bc2535fd7c685562ffde0ada" "20250511103527.841":
-  entity programcounter at 1( 0) + 0 on 109;
-  architecture behavioral of programcounter at 15( 415) + 0 on 110;
-file . "instruction_memory.vhdl" "65d46f4c490beeddbca3a56297f6907ffa14806a" "20250511103527.841":
-  entity instructionmemory at 1( 0) + 0 on 107;
-  architecture behavioral of instructionmemory at 13( 299) + 0 on 108;
+file . "instruction_fetch.vhdl" "dbb99cda032eb61540c0f990854af61bb58a4a12" "20250511154731.303":
+  entity instructionfetch at 1( 0) + 0 on 207;
+  architecture behavioral of instructionfetch at 16( 547) + 0 on 208;
+  entity instructionfetchtb at 37( 1219) + 0 on 209;
+  architecture behavioral of instructionfetchtb at 45( 1344) + 0 on 210;
+file . "program_counter.vhdl" "b9d53a5c1999c0e80d5f0c3f8b4e5ba3d70f7ddd" "20250511154731.303":
+  entity programcounter at 1( 0) + 0 on 205;
+  architecture behavioral of programcounter at 15( 526) + 0 on 206;
+file . "instruction_memory.vhdl" "c4ff23ea1ed0f387eea3f2b9c2cc4ca9c3a0e9f0" "20250511154731.303":
+  entity instructionmemory at 1( 0) + 0 on 203;
+  architecture behavioral of instructionmemory at 13( 355) + 0 on 204;

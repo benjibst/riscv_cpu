@@ -4,12 +4,12 @@ use ieee.numeric_std.all;
 
 entity InstructionFetch is
     port (
-        if_clk          : in  std_logic;
-        if_load_en      : in  std_logic;
-        if_pc_in        : in  std_logic_vector(11 downto 0);
-        if_instruction  : out std_logic_vector(31 downto 0);
-        if_pc_curr      : out std_logic_vector(11 downto 0);
-        if_pc_next      : out std_logic_vector(11 downto 0)
+        if_clk          : in  std_logic:= '0';
+        if_load_en      : in  std_logic:= '1';
+        if_pc_in        : in  std_logic_vector(11 downto 0):= (others => '0');
+        if_instruction  : out std_logic_vector(31 downto 0):= (others => '0');
+        if_pc_curr      : out std_logic_vector(11 downto 0):= (others => '0');
+        if_pc_next      : out std_logic_vector(11 downto 0):= (others => '0')
     );
 end InstructionFetch;
 
@@ -46,16 +46,17 @@ architecture Behavioral of InstructionFetchTB is
     signal clk_period : time := 10 ns;
 
     signal tb_clk         : std_logic := '0';
-    signal tb_load_en : std_logic := '1';
+    signal tb_load_en     : std_logic := '1';
     signal tb_pc_in       : std_logic_vector(11 downto 0) := (others => '0');
-    signal tb_instruction : std_logic_vector(31 downto 0);
-    signal tb_pc_curr     : std_logic_vector(11 downto 0);
-    signal tb_pc_next     : std_logic_vector(11 downto 0);
+    signal tb_instruction : std_logic_vector(31 downto 0):= (others => '0');
+    signal tb_pc_curr     : std_logic_vector(11 downto 0):= (others => '0');
+    signal tb_pc_next     : std_logic_vector(11 downto 0):= (others => '0');
 begin
+    tb_pc_in <= tb_pc_next;
     uut: entity work.InstructionFetch(Behavioral)
         port map (
             if_clk         => tb_clk,
-            if_load_en => tb_load_en,
+            if_load_en     => tb_load_en,
             if_pc_in       => tb_pc_in,
             if_instruction => tb_instruction,
             if_pc_curr     => tb_pc_curr,
@@ -70,13 +71,4 @@ begin
             wait for clk_period / 2;
         end loop;
     end process;
-
-    process(tb_clk)
-    begin
-        if rising_edge(tb_clk) then
-            tb_pc_in <= std_logic_vector(to_unsigned(to_integer(unsigned(tb_pc_in)) + 1, 12));
-        end if;
-    end process;
-
-    
 end Behavioral;

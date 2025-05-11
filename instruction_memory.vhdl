@@ -4,9 +4,9 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity InstructionMemory is
     Port (
-        im_addr    : in  STD_LOGIC_VECTOR(11 downto 0); -- pc input
-        im_clk     : in  STD_LOGIC;
-        im_data    : out STD_LOGIC_VECTOR(31 downto 0)
+        im_addr    : in  STD_LOGIC_VECTOR(11 downto 0):= (others => '0'); -- pc input
+        im_clk     : in  STD_LOGIC:='0'; -- clock input
+        im_data    : out STD_LOGIC_VECTOR(31 downto 0):= (others => '0')
     );
 end InstructionMemory;
 
