@@ -1,74 +1,72 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity InstructionFetch is
-    port (
-        if_clk          : in  std_logic:= '0';
-        if_load_en      : in  std_logic:= '1';
-        if_pc_in        : in  std_logic_vector(11 downto 0):= (others => '0');
-        if_instruction  : out std_logic_vector(31 downto 0):= (others => '0');
-        if_pc_curr      : out std_logic_vector(11 downto 0):= (others => '0');
-        if_pc_next      : out std_logic_vector(11 downto 0):= (others => '0')
+ENTITY InstructionFetch IS
+    PORT (
+        if_clk : IN STD_LOGIC := '0';
+        if_load_en : IN STD_LOGIC := '1';
+        if_pc_in : IN STD_LOGIC_VECTOR(11 DOWNTO 0) := (OTHERS => '0');
+        if_instruction : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '0');
+        if_pc_curr : OUT STD_LOGIC_VECTOR(11 DOWNTO 0) := (OTHERS => '0');
+        if_pc_next : OUT STD_LOGIC_VECTOR(11 DOWNTO 0) := (OTHERS => '0')
     );
-end InstructionFetch;
+END InstructionFetch;
 
-architecture Behavioral of InstructionFetch is
-    signal if_pc_curr_reg : std_logic_vector(11 downto 0);
-begin
-    pc : entity work.ProgramCounter(Behavioral)
-        port map (
-             pc_clk     =>  if_clk      ,
-             pc_load_en =>  if_load_en  ,
-             pc_in      =>  if_pc_in    ,
-             pc_curr    =>  if_pc_curr_reg ,
-             pc_next    =>  if_pc_next  
+ARCHITECTURE RTL OF InstructionFetch IS
+    SIGNAL if_pc_curr_reg : STD_LOGIC_VECTOR(11 DOWNTO 0);
+BEGIN
+    pc : ENTITY work.ProgramCounter(Behavioral)
+        PORT MAP(
+            pc_clk => if_clk,
+            pc_load_en => if_load_en,
+            pc_in => if_pc_in,
+            pc_curr => if_pc_curr_reg,
+            pc_next => if_pc_next
         );
-    im : entity work.InstructionMemory(Behavioral) 
-        port map (
-             im_addr    =>  if_pc_curr_reg(11 downto 0),
-             im_clk     =>  if_clk,
-             im_data    =>  if_instruction
+    im : ENTITY work.InstructionMemory(Behavioral)
+        PORT MAP(
+            im_addr => if_pc_curr_reg(11 DOWNTO 0),
+            im_clk => if_clk,
+            im_data => if_instruction
         );
     if_pc_curr <= if_pc_curr_reg;
 
-end Behavioral;
+END RTL;
 
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+ENTITY InstructionFetchTB IS
+END InstructionFetchTB;
 
+ARCHITECTURE RTL OF InstructionFetchTB IS
+    SIGNAL clk_period : TIME := 10 ns;
 
-entity InstructionFetchTB is
-end InstructionFetchTB;
-
-architecture Behavioral of InstructionFetchTB is
-    signal clk_period : time := 10 ns;
-
-    signal tb_clk         : std_logic := '0';
-    signal tb_load_en     : std_logic := '1';
-    signal tb_pc_in       : std_logic_vector(11 downto 0) := (others => '0');
-    signal tb_instruction : std_logic_vector(31 downto 0):= (others => '0');
-    signal tb_pc_curr     : std_logic_vector(11 downto 0):= (others => '0');
-    signal tb_pc_next     : std_logic_vector(11 downto 0):= (others => '0');
-begin
+    SIGNAL tb_clk : STD_LOGIC := '0';
+    SIGNAL tb_load_en : STD_LOGIC := '1';
+    SIGNAL tb_pc_in : STD_LOGIC_VECTOR(11 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL tb_instruction : STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL tb_pc_curr : STD_LOGIC_VECTOR(11 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL tb_pc_next : STD_LOGIC_VECTOR(11 DOWNTO 0) := (OTHERS => '0');
+BEGIN
     tb_pc_in <= tb_pc_next;
-    uut: entity work.InstructionFetch(Behavioral)
-        port map (
-            if_clk         => tb_clk,
-            if_load_en     => tb_load_en,
-            if_pc_in       => tb_pc_in,
+    uut : ENTITY work.InstructionFetch(Behavioral)
+        PORT MAP(
+            if_clk => tb_clk,
+            if_load_en => tb_load_en,
+            if_pc_in => tb_pc_in,
             if_instruction => tb_instruction,
-            if_pc_curr     => tb_pc_curr,
-            if_pc_next     => tb_pc_next
+            if_pc_curr => tb_pc_curr,
+            if_pc_next => tb_pc_next
         );
-    process
-    begin
-        while true loop
+    PROCESS
+    BEGIN
+        WHILE true LOOP
             tb_clk <= '1';
-            wait for clk_period / 2;
+            WAIT FOR clk_period / 2;
             tb_clk <= '0';
-            wait for clk_period / 2;
-        end loop;
-    end process;
-end Behavioral;
+            WAIT FOR clk_period / 2;
+        END LOOP;
+    END PROCESS;
+END RTL;
