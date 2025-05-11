@@ -13,12 +13,12 @@ entity ProgramCounter is
 end ProgramCounter;
 
 architecture Behavioral of ProgramCounter is
-    signal pc_num       : UNSIGNED(11 downto 0); 
+    signal pc_num       : UNSIGNED(11 downto 0);  -- PC value is stored in 10 bits internally
 begin
     process(pc_clk)
     begin
         if rising_edge(pc_clk) then
-            pc_num <= unsigned(pc_in) + 4;
+            pc_num <= unsigned(pc_in) + 4;  -- increment by 1, will be shifted left by 2
         end if;
     end process;
 

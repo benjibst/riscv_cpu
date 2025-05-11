@@ -15,7 +15,6 @@ end InstructionFetch;
 
 architecture Behavioral of InstructionFetch is
     signal if_pc_curr_reg : std_logic_vector(11 downto 0);
-    signal if_pc_next_reg : std_logic_vector(11 downto 0);
 begin
     pc : entity work.ProgramCounter(Behavioral)
         port map (
@@ -31,6 +30,8 @@ begin
              im_clk     =>  if_clk,
              im_data    =>  if_instruction
         );
+    if_pc_curr <= if_pc_curr_reg;
+
 end Behavioral;
 
 library ieee;
@@ -45,7 +46,7 @@ architecture Behavioral of InstructionFetchTB is
     signal clk_period : time := 10 ns;
 
     signal tb_clk         : std_logic := '0';
-    signal tb_load_en     : std_logic := '1';
+    signal tb_load_en : std_logic := '1';
     signal tb_pc_in       : std_logic_vector(11 downto 0) := (others => '0');
     signal tb_instruction : std_logic_vector(31 downto 0);
     signal tb_pc_curr     : std_logic_vector(11 downto 0);
@@ -54,7 +55,7 @@ begin
     uut: entity work.InstructionFetch(Behavioral)
         port map (
             if_clk         => tb_clk,
-            if_load_en     => tb_load_en,
+            if_load_en => tb_load_en,
             if_pc_in       => tb_pc_in,
             if_instruction => tb_instruction,
             if_pc_curr     => tb_pc_curr,
@@ -62,13 +63,20 @@ begin
         );
     process
     begin
-        wait for 100 ns;   
         while true loop
             tb_clk <= '1';
             wait for clk_period / 2;
             tb_clk <= '0';
             wait for clk_period / 2;
         end loop;
-    end process;    
+    end process;
+
+    process(tb_clk)
+    begin
+        if rising_edge(tb_clk) then
+            tb_pc_in <= std_logic_vector(to_unsigned(to_integer(unsigned(tb_pc_in)) + 1, 12));
+        end if;
+    end process;
+
     
 end Behavioral;
