@@ -1,12 +1,25 @@
 v 4
-file . "instruction_fetch.vhdl" "dbb99cda032eb61540c0f990854af61bb58a4a12" "20250511154731.303":
-  entity instructionfetch at 1( 0) + 0 on 207;
-  architecture behavioral of instructionfetch at 16( 547) + 0 on 208;
-  entity instructionfetchtb at 37( 1219) + 0 on 209;
-  architecture behavioral of instructionfetchtb at 45( 1344) + 0 on 210;
-file . "program_counter.vhdl" "b9d53a5c1999c0e80d5f0c3f8b4e5ba3d70f7ddd" "20250511154731.303":
-  entity programcounter at 1( 0) + 0 on 205;
-  architecture behavioral of programcounter at 15( 526) + 0 on 206;
-file . "instruction_memory.vhdl" "c4ff23ea1ed0f387eea3f2b9c2cc4ca9c3a0e9f0" "20250511154731.303":
-  entity instructionmemory at 1( 0) + 0 on 203;
-  architecture behavioral of instructionmemory at 13( 355) + 0 on 204;
+file . "instruction_fetch.vhdl" "0d3e96730e31c6c1a244985f9a08404835aad372" "20250512091302.867":
+  entity instructionfetch at 1( 0) + 0 on 273;
+  architecture rtl of instructionfetch at 16( 518) + 0 on 274;
+  entity instructionfetchtb at 37( 1103) + 0 on 275;
+  architecture rtl of instructionfetchtb at 43( 1226) + 0 on 276;
+file . "program_counter.vhdl" "b285311a264bd7a48ff7d2c78271c85f43a31a8f" "20250512091302.867":
+  entity programcounter at 1( 0) + 0 on 271;
+  architecture rtl of programcounter at 15( 503) + 0 on 272;
+file . "instruction_memory.vhdl" "b3d04de447b5e216a1fce9d331397687d96b10dc" "20250512091302.866":
+  entity instructionmemory at 1( 0) + 0 on 269;
+  architecture rtl of instructionmemory at 13( 347) + 0 on 270;
+file . "multiplexer.vhdl" "9a57b9d5ed8f655e85bc7ffca7dac9fc9ba35485" "20250512091351.120":
+  entity multiplexer4_1 at 1( 0) + 0 on 277;
+  architecture rtl of multiplexer4_1 at 16( 370) + 0 on 278;
+  entity multiplexer2_1 at 32( 790) + 0 on 279;
+  architecture rtl of multiplexer2_1 at 46( 1114) + 0 on 280;
+file . "register_file.vhdl" "dcb39db8c2a8ef89c22dd0983a3a3325071d17f2" "20250512091351.120":
+  entity registerfile at 1( 0) + 0 on 281;
+  architecture rtl of registerfile at 17( 569) + 0 on 282;
+file . "register_access.vhdl" "aaf96a61fa95d4ebd43d583ee11d809741d29d78" "20250512091351.121":
+  entity registeraccess at 1( 0) + 0 on 283;
+  architecture rtl of registeraccess at 18( 643) + 0 on 284;
+  entity registeraccesstb at 42( 1520) + 0 on 285;
+  architecture rtl of registeraccesstb at 48( 1639) + 0 on 286;

@@ -16,7 +16,7 @@ END InstructionFetch;
 ARCHITECTURE RTL OF InstructionFetch IS
     SIGNAL if_pc_curr_reg : STD_LOGIC_VECTOR(11 DOWNTO 0);
 BEGIN
-    pc : ENTITY work.ProgramCounter(Behavioral)
+    pc : ENTITY work.ProgramCounter(RTL)
         PORT MAP(
             pc_clk => if_clk,
             pc_load_en => if_load_en,
@@ -24,7 +24,7 @@ BEGIN
             pc_curr => if_pc_curr_reg,
             pc_next => if_pc_next
         );
-    im : ENTITY work.InstructionMemory(Behavioral)
+    im : ENTITY work.InstructionMemory(RTL)
         PORT MAP(
             im_addr => if_pc_curr_reg(11 DOWNTO 0),
             im_clk => if_clk,
@@ -51,7 +51,7 @@ ARCHITECTURE RTL OF InstructionFetchTB IS
     SIGNAL tb_pc_next : STD_LOGIC_VECTOR(11 DOWNTO 0) := (OTHERS => '0');
 BEGIN
     tb_pc_in <= tb_pc_next;
-    uut : ENTITY work.InstructionFetch(Behavioral)
+    uut : ENTITY work.InstructionFetch(RTL)
         PORT MAP(
             if_clk => tb_clk,
             if_load_en => tb_load_en,
