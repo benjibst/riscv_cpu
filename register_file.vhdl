@@ -35,9 +35,8 @@ ARCHITECTURE RTL OF RegisterFile IS
         15 => x"00018000",
         OTHERS => x"00000000"
     );
-    SIGNAL rs1val_latch : STD_LOGIC_VECTOR(31 DOWNTO 0);
-    SIGNAL rs2val_latch : STD_LOGIC_VECTOR(31 DOWNTO 0);
-
+    SIGNAL rs1val_reg : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL rs2val_reg : STD_LOGIC_VECTOR(31 DOWNTO 0);
 BEGIN
 
     PROCESS (rf_clk)
@@ -46,10 +45,10 @@ BEGIN
             IF rf_we = '1' THEN
                 registers(to_integer(unsigned(rf_rwaddr))) <= rf_rdval;
             END IF;
-            rs1val_latch <= registers(to_integer(unsigned(rf_rwaddr)));
-            rs2val_latch <= registers(to_integer(unsigned(rf_rs2addr)));
+            rs1val_reg <= registers(to_integer(unsigned(rf_rwaddr)));
+            rs2val_reg <= registers(to_integer(unsigned(rf_rs2addr)));
         END IF;
     END PROCESS;
-    rf_rs1val <= rs1val_latch;
-    rf_rs2val <= rs2val_latch;
+    rf_rs1val <= rs1val_reg;
+    rf_rs2val <= rs2val_reg;
 END RTL;
