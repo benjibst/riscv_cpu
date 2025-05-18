@@ -1,26 +1,22 @@
---generic sign extension block 
+--generic sign extension
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
-USE ieee.numeric_std.ALL;
-ENTITY SignExtension IS
-    GENERIC (
-        se_input_width : INTEGER;
-        se_output_width : INTEGER
-    );
-    PORT (
-        se_input : IN STD_LOGIC_VECTOR(se_input_width DOWNTO 0) := (OTHERS => '0');
-        se_output : OUT STD_LOGIC_VECTOR(se_output_width DOWNTO 0) := (OTHERS => '0')
-    );
-END ENTITY SignExtension;
-ARCHITECTURE RTL OF SignExtension IS
-BEGIN
-    PROCESS (se_input)
-    BEGIN
-        IF se_input(se_input_width - 1) = '1' THEN
-            se_output <= (OTHERS => '1') & se_input;
-        ELSE
-            se_output <= (OTHERS => '0') & se_input;
-        END IF;
-    END PROCESS;
-END ARCHITECTURE RTL;
+library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.numeric_std.all;
+
+entity SignExtension is
+  generic (
+    se_input_width  : INTEGER;
+    se_output_width : INTEGER
+  );
+  port (
+    se_in  : in  STD_LOGIC_VECTOR(se_input_width downto 0)  := (others => '0');
+    se_out : out STD_LOGIC_VECTOR(se_output_width downto 0) := (others => '0')
+  );
+end entity;
+
+architecture RTL of SignExtension is
+begin
+  se_out <= (others => '1') & se_in when se_in(se_input_width - 1) = '1' else
+             (others => '0') & se_in;
+end architecture;
