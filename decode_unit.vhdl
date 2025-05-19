@@ -5,7 +5,7 @@ entity DecodeUnit is
   port (
     du_clk        : in  STD_LOGIC;
     du_funct3_in  : in  STD_LOGIC_VECTOR(2 downto 0);
-    du_funct7     : in  STD_LOGIC_VECTOR(6 downto 0);
+    du_funct7_in  : in  STD_LOGIC_VECTOR(6 downto 0);
     du_opcode     : in  STD_LOGIC_VECTOR(6 downto 0);
     du_funct3_out : out STD_LOGIC_VECTOR(2 downto 0);
     du_a_sel      : out STD_LOGIC; --RS1 or PC
