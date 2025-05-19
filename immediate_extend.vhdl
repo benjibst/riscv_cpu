@@ -1,7 +1,7 @@
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
 
-entity ImmediateExtension is
+entity ImmediateExtension is --Extracts the immediate value from the instruction and sign extends it if necessary
   port (
     ie_clk     : in  STD_LOGIC;
     ie_instr   : in  STD_LOGIC_VECTOR(31 downto 0);
@@ -42,7 +42,7 @@ begin
       else
         (others => "1") & (ie_instr(31) & ie_instr(19 downto 12) & ie_instr(20) & ie_instr(30 downto 21));
       ----------------------------------------------------------------
-      when "0110111" | "0010111" => -- U type instructions
+      when "0110111" | "0010111" => -- U type instructions (LUI and AUIPC)
         sign_extended <= (ie_instr(31 downto 12) & (others => '0'));
     end case;
   end process;
