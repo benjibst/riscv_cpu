@@ -38,7 +38,11 @@ begin
   funct7 <= id_instruction(31 downto 25);
   opcode <= id_instruction(6 downto 0);
 
-  current_pc_se: entity work.SignExtension(RTL) port map (
+  current_pc_se: entity work.SignExtension(RTL) 
+   generic map (
+      WIDTH => 5
+    )
+    port map (
     se_in  => id_pc_curr,
     se_out => id_pc_curr_se
   );

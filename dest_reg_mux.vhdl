@@ -18,11 +18,11 @@ begin
   process (drm_class, drm_next_pc, drm_alu_result, drm_mem_data)
   begin
     case drm_class is
-      when op_class.op_jump =>
+      when op_jump =>
         drm_rd_val <= drm_next_pc;
-      when op_class.op_alu =>
+      when op_alu =>
         drm_rd_val <= drm_alu_result;
-      when op_class.op_load =>
+      when op_load =>
         drm_rd_val <= drm_mem_data;
     end case;
   end process;
