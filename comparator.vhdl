@@ -1,7 +1,7 @@
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
-  use IEEE.STD_LOGIC_ARITH.all;
-  use work.optypes.comp_op;
+  use IEEE.numeric_std.all;
+  use work.riscv_types_pkg.comp_op;
 
 entity ComparatorUnit is
   port (

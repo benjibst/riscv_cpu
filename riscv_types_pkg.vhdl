@@ -1,6 +1,6 @@
 library IEEE;
 
-package optypes is
+package riscv_types_pkg is
   type alu_op is (
       alu_add,
       alu_sub,

@@ -1,6 +1,6 @@
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
-  use work.optypes.all;
+  use work.riscv_types_pkg.all;
 
 entity InstructionDecode is
   port (
@@ -38,15 +38,17 @@ begin
   funct7 <= id_instruction(31 downto 25);
   opcode <= id_instruction(6 downto 0);
 
-  current_pc_se: entity work.SignExtension(RTL) 
-   generic map (
-      WIDTH => 5
-    )
-    port map (
+  current_pc_se: entity work.SignExtension(RTL) generic map (
+    se_input_width  => 12,
+    se_output_width => 32
+  ) port map (
     se_in  => id_pc_curr,
     se_out => id_pc_curr_se
   );
-  next_pc_se: entity work.SignExtension(RTL) port map (
+  next_pc_se: entity work.SignExtension(RTL) generic map (
+    se_input_width  => 12,
+    se_output_width => 32
+  ) port map (
     se_in  => id_pc_next,
     se_out => id_pc_next_se
   );
