@@ -16,24 +16,6 @@ end entity;
 
 architecture RTL of ALU is
   signal result : STD_LOGIC_VECTOR(31 downto 0);
-
-  function sra32(val : signed(31 downto 0); amount : integer) return signed is
-    variable res : signed(31 downto 0);
-  begin
-    if amount >= 32 then
-      if val(31) = '1' then
-        res := (others => '1'); -- Sign extend with '1'
-      else
-        res := (others => '0');
-      end if;
-    else
-      res := (val(31) & val(31 downto amount)); -- Shift with sign extension
-      for i in 0 to amount - 1 loop
-        res(i) := val(31); -- Sign extend lower bits
-      end loop;
-    end if;
-    return res;
-  end function;
 begin
   alu_result_pre <= result;
 

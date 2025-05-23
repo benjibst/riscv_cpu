@@ -13,7 +13,7 @@ entity DataMemory is
 end entity;
 
 architecture RTL of DataMemory is
-  type ram_type is array (0 to 4095) of STD_LOGIC_VECTOR(31 downto 0);
+  type ram_type is array (0 to 4095) of STD_LOGIC_VECTOR(7 downto 0);
   signal ram : ram_type;
 begin
   process (dm_clk)
